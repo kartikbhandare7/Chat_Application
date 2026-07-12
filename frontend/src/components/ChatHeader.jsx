@@ -1,6 +1,8 @@
 import {BsChatDotsFill} from "react-icons/bs";
 
-export default function ChatHeader(){
+export default function ChatHeader({
+    username, onlineUsers,
+}){
     return(
         <div className = "flex items-center justify-between p-5 border-b border-slate-800 bg-slate-900">
             <div className = "flex items-center gap-3">
@@ -17,6 +19,16 @@ export default function ChatHeader(){
                         Socket.io + MongoDB
                     </p>
                 </div>    
+            </div>
+            <div className="flex items-center gap-6">
+                <span className="text-green-400">
+                    🟢 {onlineUsers} Online
+                </span>
+
+                <span className="text-slate-300">
+                    {username}
+                </span>
+
             </div>
             <div className = "flex items-center gap-2">
                 <span className = "w-3 h-3 rounded-full bg-green-500 animate-pulse" />

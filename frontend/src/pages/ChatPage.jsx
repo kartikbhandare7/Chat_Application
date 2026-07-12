@@ -3,29 +3,40 @@ import { useState } from "react";
 import ChatHeader from "../components/ChatHeader";
 import ChatBody from "../components/ChatBody";
 import ChatInput from "../components/ChatInput";
+import UsernameModal from "../components/UsernameModel";
 
 import useChat from "../hooks/useChat";
 
 export default function ChatPage() {
 
-    const [username] = useState("Kartik");
+    const [username, setUsername] = useState("");
 
+    // ✅ Always call hooks
     const {
         messages,
         sendMessage,
         messagesEndRef,
+        onlineUsers,
     } = useChat();
 
-    return (
+    // ✅ Then conditionally render
+    if (!username) {
+        return <UsernameModal onJoin={setUsername} />;
+    }
 
+    return (
         <div className="min-h-screen bg-slate-950 flex justify-center items-center p-6">
 
-            <div className="w-full max-w-5xl h-[90vh] bg-slate-900 rounded-3xl flex flex-col overflow-hidden shadow-2xl">
+            <div className="w-full max-w-5xl h-[90vh] bg-slate-900 rounded-3xl flex flex-col overflow-hidden">
 
-                <ChatHeader />
+                <ChatHeader 
+                    username={username}
+                    onlineUsers={onlineUsers}
+                />
 
                 <ChatBody
                     messages={messages}
+                    username={username}
                     messagesEndRef={messagesEndRef}
                 />
 
@@ -37,7 +48,5 @@ export default function ChatPage() {
             </div>
 
         </div>
-
     );
-
 }

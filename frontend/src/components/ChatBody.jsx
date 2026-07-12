@@ -2,7 +2,8 @@ import MessageBubble from "./MessageBubble";
 
 export default function ChatBody({
     messages,
-    messagesEndRef,
+    username,
+    messagesEndRef
 }) {
 
     return (
@@ -16,6 +17,7 @@ export default function ChatBody({
                     <MessageBubble
                         key={message._id}
                         message={message}
+                        currentUser={username}
                     />
 
                 ))}
