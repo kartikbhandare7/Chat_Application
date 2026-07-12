@@ -1,16 +1,20 @@
 const message = require("../models/Message");
-
+let onlineUsers = 0;
 module.exports = (io) => {
     io.on("connection", (socket) => {
         console.log(`User connected: ${socket.id}`);
         socket.on("send_message", async (data) => {
             try{
-                const message = await message.create({
+                 const message = await Message.create({
                     username: data.username,
                     text: data.text,
                     timestamp: new Date()
                 });
-                io.emit("receive_message", message);
+            onlineUsers++;
+
+            io.emit("online_users", onlineUsers);
+
+    io.emit("receive_message", message);
             }
             catch(error){
                 console.error(error);
@@ -18,7 +22,10 @@ module.exports = (io) => {
             }
         });
         socket.on("disconnect", () => {
+            onlineUsers--;
+            io.emit("online_users", onlineUsers);
             console.log(`User disconnected: ${socket.id}`);
+            
         });
     });
 };
