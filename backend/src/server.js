@@ -8,7 +8,7 @@ const connectDB = require("./config/database");
 
 const PORT = process.env.PORT || 5000;
 
-const {server} = require("socket.io");
+const {Server} = require("socket.io");
 
 connectDB();
 
@@ -22,7 +22,6 @@ const io = new Server(server, {
 
 require("./sockets/socket")(io);
 
-const PORT = process.env.PORT || 5000;
 
 server.listen(PORT,() => {
     console.log(`Server is running on port ${PORT}`);
