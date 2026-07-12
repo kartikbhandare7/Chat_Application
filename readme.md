@@ -206,7 +206,13 @@ Broadcasts the current number of connected users whenever someone connects or di
     updatedAt: Date
 }
 ```
+## Live Demo
 
+Frontend:
+[https://YOUR-VERCEL.vercel.app](https://chat-application-eight-blush.vercel.app/)
+
+Backend API:
+https://chat-application-2-zaro.onrender.com
 ---
 
 # 🚀 Getting Started
