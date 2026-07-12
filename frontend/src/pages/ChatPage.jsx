@@ -1,23 +1,43 @@
+import { useState } from "react";
+
 import ChatHeader from "../components/ChatHeader";
 import ChatBody from "../components/ChatBody";
 import ChatInput from "../components/ChatInput";
 
+import useChat from "../hooks/useChat";
+
 export default function ChatPage() {
+
+    const [username] = useState("Kartik");
+
+    const {
+        messages,
+        sendMessage,
+        messagesEndRef,
+    } = useChat();
+
     return (
-        <div className = "min-h-screen bg-slate-950 flex items-center justify-center p-6">
-            <div className = "w-full max-w-5xl h-[90vh] bg-slate-900 rounded-3xl shadow-2xl border border-slate-800 flex-col overflow-hidden">
-                <div className="flex flex-col h-full">
 
-                    <ChatHeader />
+        <div className="min-h-screen bg-slate-950 flex justify-center items-center p-6">
 
-                    <main className="flex-1 overflow-hidden">
-                        <ChatBody />
-                    </main>
+            <div className="w-full max-w-5xl h-[90vh] bg-slate-900 rounded-3xl flex flex-col overflow-hidden shadow-2xl">
 
-                    <ChatInput />
+                <ChatHeader />
 
-                </div>
+                <ChatBody
+                    messages={messages}
+                    messagesEndRef={messagesEndRef}
+                />
+
+                <ChatInput
+                    username={username}
+                    sendMessage={sendMessage}
+                />
+
             </div>
+
         </div>
+
     );
+
 }
