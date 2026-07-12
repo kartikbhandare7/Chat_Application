@@ -15,7 +15,7 @@ export default function ChatBody({
                 {messages.map((message) => (
 
                     <MessageBubble
-                        key={message._id}
+                        key={message._id || `${message.timestamp}-${message.username}`}
                         message={message}
                         currentUser={username}
                     />

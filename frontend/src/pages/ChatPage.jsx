@@ -9,7 +9,9 @@ import useChat from "../hooks/useChat";
 
 export default function ChatPage() {
 
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(
+        localStorage.getItem("username") || ""
+    );
 
     // ✅ Always call hooks
     const {
@@ -18,10 +20,14 @@ export default function ChatPage() {
         messagesEndRef,
         onlineUsers,
     } = useChat();
-
+    
+    const handleJoin = (name) => {
+        localStorage.setItem("username", name);
+        setUsername(name);
+    };
     // ✅ Then conditionally render
     if (!username) {
-        return <UsernameModal onJoin={setUsername} />;
+        return <UsernameModal onJoin={handleJoin} />;
     }
 
     return (

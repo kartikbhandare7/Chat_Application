@@ -22,6 +22,7 @@ export default function useChat() {
         return () => {
 
             socket.off("receive_message");
+            socket.off("online_users");
 
         };
 
